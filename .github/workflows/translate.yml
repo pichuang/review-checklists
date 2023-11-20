@@ -2,16 +2,16 @@ name: Translation
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
 on:
   # pull_request:
   #   branches: [ main ]
   #   paths:
-  #   - '**.en.json' # only take action when *.en.json files change   
+  #   - '**.en.json' # only take action when *.en.json files change
   push:
     branches: [ main ]
     paths:
-    - '**.en.json' # only take action when *.en.json files change   
+    - '**.en.json' # only take action when *.en.json files change
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
         name: Verify whether this action is a result of another action
         run: |
           for input_file in ${{ steps.files.outputs.all }}; do
-            if [[ "$input_file" == *"xlsx" ]]; then 
+            if [[ "$input_file" == *"xlsx" ]]; then
               echo "Modification to XLSX file $input_file detected, this seems to be the output of an automated PR"
               echo "excel_file_changed=yes" >> $GITHUB_OUTPUT
             else
@@ -56,7 +56,7 @@ jobs:
           AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
         run: |
           echo "DEBUG: steps.automationresult.outputs.excel_file_changed: ${{ steps.automationresult.outputs.excel_file_changed }}"
-          for input_file in ${{ steps.files.outputs.all }}; do 
+          for input_file in ${{ steps.files.outputs.all }}; do
             input_file_extension=${input_file: -7}
             # Only process English checklists (.en.json)
             if [[ "$input_file_extension" == "en.json" ]]; then
