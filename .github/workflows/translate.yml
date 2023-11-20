@@ -10,8 +10,8 @@ on:
   #   - '**.en.json' # only take action when *.en.json files change
   push:
     branches: [ main ]
-    paths:
-    - '**.en.json' # only take action when *.en.json files change
+    # paths:
+    # - '**.en.json' # only take action when *.en.json files change
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -24,9 +24,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # # Get list of files that have been changed in the push
-      # - id: files
-      #   uses: masesgroup/retrieve-changed-files@v2
+      # Get list of files that have been changed in the push
+      - id: files
+        uses: masesgroup/retrieve-changed-files@v2
 
       # Set variables that indicate whether XLSX files have been modified, which would indicate that
       #   this action has been triggered by an automated action
